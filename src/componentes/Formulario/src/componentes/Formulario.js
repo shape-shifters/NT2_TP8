@@ -5,7 +5,6 @@ export default {
   props: [],
   data () {
     return {
-      url: "https://60aeb9365b8c300017deb261.mockapi.io/users",
       formData : this.getInicialData(),
       formState : {},
       allMyData: [],
@@ -36,34 +35,17 @@ export default {
     },
 
     // POST THEN/CATCH
-    enviarThenCatch() {
-      fetch(this.url, {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify(this.formData)
-      })
-      .then(respuesta => respuesta.json())
-      .then(respuesta => {
-        this.allMyData.push(respuesta);
-      })
-      .catch(error => console.log(error));
-    this.clear();
-  },
+    postUserThenCatch() {
+      const user = { "nombre": 'then catch' + this.formData.nombre, "email": this.formData.email, "edad": this.formData.edad }
+      this.$store.dispatch('postUserThenCatch', user)
+    },
 
-  // POST ASYNC/AWAIT
-  async enviar() {
-    try {
-      let { data } = await this.axios.post(this.url, this.formData);
-      this.allMyData.push(data);
-    } catch(error) {
-      console.log(error);
-    }
-    this.clear();
-  },
-  
+    // POST ASYNC/AWAIT
+    async postUser() {
+      const user = { "nombre": 'async await' + this.formData.nombre, "email": this.formData.email, "edad": this.formData.edad }
+        this.$store.dispatch('postUser', user)
+    },
+
   }
 }
 
