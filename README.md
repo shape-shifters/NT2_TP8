@@ -1,4 +1,4 @@
-# nt2_tp6
+# nt2_tp8
 
 ## Project setup
 ```
